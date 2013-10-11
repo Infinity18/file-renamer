@@ -4,3 +4,8 @@
 *.jar
 *.war
 *.ear
+
+# IDEA Files #
+.idea
+*.iml
+atlassian-ide-plugin.xml
