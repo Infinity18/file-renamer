@@ -11,4 +11,7 @@ public class Constants {
     // Menu "File"
     public static final String MENU_FILE = "Файл";
     public static final String MENU_ITEM_EXIT = "Выход";
+
+    // Buttons
+    public static final String BUTTON_OPEN_DIR = "Open Dir";
 }
