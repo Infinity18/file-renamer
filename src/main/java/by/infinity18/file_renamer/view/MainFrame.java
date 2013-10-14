@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import static by.infinity18.file_renamer.view.Constants.BUTTON_OPEN_DIR;
+import static by.infinity18.file_renamer.view.Constants.*;
 import static by.infinity18.file_renamer.view.SwingUtils.*;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.Color.WHITE;
@@ -21,6 +21,9 @@ import static javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
  * @date 11.10.13
  */
 public class MainFrame extends JFrame {
+
+    public JTextField dirTextField;
+    public JTable filesTable;
 
     private MainFrameActions actions = new MainFrameActions(this);
 
@@ -63,14 +66,17 @@ public class MainFrame extends JFrame {
 
     private JPanel createTopPanel() {
         JPanel topPanel = createPanel(new GridBagLayout());
-        topPanel.add(createDirTextField(), createGridBagConstraints(0, 0, NONE));
+        this.dirTextField = createDirTextField();
+        topPanel.add(this.dirTextField, createGridBagConstraints(0, 0, NONE));
+        topPanel.add(createChooseDirButton(), createGridBagConstraints(1, 0, HORIZONTAL));
         topPanel.add(createOpenDirButton(), createGridBagConstraints(2, 0, HORIZONTAL));
+        topPanel.add(createExitDirButton(), createGridBagConstraints(3, 0, HORIZONTAL));
         return topPanel;
     }
 
-    private JButton createOpenDirButton() {
+    private JButton createChooseDirButton() {
         return createButton(
-                BUTTON_OPEN_DIR,
+                BUTTON_CHOOSE_DIR,
                 new Dimension(100, 30),
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -82,6 +88,46 @@ public class MainFrame extends JFrame {
                     public void keyPressed(KeyEvent e) {
                         if (e.getKeyCode() == VK_ENTER) {
                             actions.chooseDir();
+                        }
+                    }
+                }
+        );
+    }
+
+    private JButton createOpenDirButton() {
+        return createButton(
+                BUTTON_OPEN_DIR,
+                new Dimension(100, 30),
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        actions.openDir();
+                    }
+                },
+                new KeyAdapter() {
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == VK_ENTER) {
+                            actions.openDir();
+                        }
+                    }
+                }
+        );
+    }
+
+    private JButton createExitDirButton() {
+        return createButton(
+                BUTTON_EXIT_DIR,
+                new Dimension(100, 30),
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        System.exit(0);
+                    }
+                },
+                new KeyAdapter() {
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == VK_ENTER) {
+                            System.exit(0);
                         }
                     }
                 }
@@ -110,11 +156,15 @@ public class MainFrame extends JFrame {
 
     private JScrollPane createFileTable() {
         JScrollPane filesScrollPane = new JScrollPane();
-        JTable filesTable = new JTable();
-        filesTable.setBackground(WHITE);
-        filesTable.setShowGrid(true);
-        filesTable.setSelectionMode(MULTIPLE_INTERVAL_SELECTION);
-        filesScrollPane.setViewportView(filesTable);
+        filesScrollPane.setViewportView(createFilesTable());
         return filesScrollPane;
+    }
+
+    private JTable createFilesTable() {
+        this.filesTable = new JTable();
+        this.filesTable.setBackground(WHITE);
+        this.filesTable.setShowGrid(true);
+        this.filesTable.setSelectionMode(MULTIPLE_INTERVAL_SELECTION);
+        return this.filesTable;
     }
 }
