@@ -39,11 +39,4 @@ public class SwingUtils {
         return textField;
     }
 
-    public static GridBagConstraints createGridBagConstraints(int gridX, int gridY, int fill) {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = gridX;
-        gbc.gridy = gridY;
-        gbc.fill = fill;
-        return gbc;
-    }
 }

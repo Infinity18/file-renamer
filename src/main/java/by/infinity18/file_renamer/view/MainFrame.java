@@ -11,8 +11,8 @@ import static by.infinity18.file_renamer.view.Constants.*;
 import static by.infinity18.file_renamer.view.SwingUtils.*;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.Color.WHITE;
+import static java.awt.GridBagConstraints.BOTH;
 import static java.awt.GridBagConstraints.HORIZONTAL;
-import static java.awt.GridBagConstraints.NONE;
 import static java.awt.event.KeyEvent.VK_ENTER;
 import static javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
 
@@ -67,10 +67,28 @@ public class MainFrame extends JFrame {
     private JPanel createTopPanel() {
         JPanel topPanel = createPanel(new GridBagLayout());
         this.dirTextField = createDirTextField();
-        topPanel.add(this.dirTextField, createGridBagConstraints(0, 0, NONE));
-        topPanel.add(createChooseDirButton(), createGridBagConstraints(1, 0, HORIZONTAL));
-        topPanel.add(createOpenDirButton(), createGridBagConstraints(2, 0, HORIZONTAL));
-        topPanel.add(createExitDirButton(), createGridBagConstraints(3, 0, HORIZONTAL));
+        topPanel.add(this.dirTextField,
+                new GridBagBucket()
+                        .withGridX(0)
+                        .withGridY(0)
+                        .withWeightX(1)
+                        .withFill(HORIZONTAL)
+                        .toConstraints());
+        topPanel.add(createChooseDirButton(),
+                new GridBagBucket()
+                        .withGridX(1)
+                        .withGridY(0)
+                        .toConstraints());
+        topPanel.add(createOpenDirButton(),
+                new GridBagBucket()
+                        .withGridX(2)
+                        .withGridY(0)
+                        .toConstraints());
+        topPanel.add(createExitDirButton(),
+                new GridBagBucket()
+                        .withGridX(3)
+                        .withGridY(0)
+                        .toConstraints());
         return topPanel;
     }
 
@@ -149,8 +167,15 @@ public class MainFrame extends JFrame {
     }
 
     private JPanel createCenterPanel() {
-        JPanel centerPanel = createPanel(new BorderLayout(0, 0));
-        centerPanel.add(createFileTable(), CENTER);
+        JPanel centerPanel = createPanel(new GridBagLayout());
+        centerPanel.add(createFileTable(),
+                new GridBagBucket()
+                        .withGridX(0)
+                        .withGridY(0)
+                        .withWeightX(1)
+                        .withWeightY(1)
+                        .withFill(BOTH)
+                        .toConstraints());
         return centerPanel;
     }
 
