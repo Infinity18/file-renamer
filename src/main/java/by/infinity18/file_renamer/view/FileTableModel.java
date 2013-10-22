@@ -1,7 +1,9 @@
 package by.infinity18.file_renamer.view;
 
+import by.infinity18.file_renamer.FileObject;
+
 import javax.swing.table.AbstractTableModel;
-import java.io.File;
+import java.util.List;
 
 /**
  * @author Evgeniy Myslovets
@@ -9,11 +11,11 @@ import java.io.File;
  */
 public class FileTableModel extends AbstractTableModel {
 
-    private File[] files;
-    private static final String[] COLUMN_NAMES = {"Имя Файла"};
+    private List<FileObject> fileObjects;
+    private static final String[] COLUMN_NAMES = {"Старое имя Файла", "Новое имя файла"};
 
-    public FileTableModel(File[] files) {
-        this.files = files;
+    public FileTableModel(List<FileObject> fileObjects) {
+        this.fileObjects = fileObjects;
         fireTableDataChanged();
     }
 
@@ -26,11 +28,21 @@ public class FileTableModel extends AbstractTableModel {
     }
 
     public int getRowCount() {
-        return this.files != null ? this.files.length : 0;
+        return this.fileObjects != null ? this.fileObjects.size() : 0;
     }
 
     public Object getValueAt(int rowIndex, int columnIndex) {
-        File file = this.files[rowIndex];
-        return file.getName();
+        switch (columnIndex) {
+            case 0:
+                return fileObjects.get(rowIndex).getOldName();
+            case 1:
+                return fileObjects.get(rowIndex).getNewName();
+            default:
+                return null;
+        }
+    }
+
+    public List<FileObject> getFileObjects() {
+        return fileObjects;
     }
 }

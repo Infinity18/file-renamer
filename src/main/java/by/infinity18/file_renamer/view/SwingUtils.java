@@ -32,6 +32,10 @@ public class SwingUtils {
         return button;
     }
 
+    public static JTextField createTextField(Dimension preferredSize) {
+        return createTextField(preferredSize, null);
+    }
+
     public static JTextField createTextField(Dimension preferredSize, KeyAdapter keyListener) {
         JTextField textField = new JTextField();
         textField.setPreferredSize(preferredSize);
