@@ -186,6 +186,7 @@ public class MainFrame extends JFrame {
         this.filesTable.setBackground(WHITE);
         this.filesTable.setShowGrid(true);
         this.filesTable.setSelectionMode(MULTIPLE_INTERVAL_SELECTION);
+        this.filesTable.setModel(new FileTableModel());
         return this.filesTable;
     }
 
@@ -216,6 +217,13 @@ public class MainFrame extends JFrame {
                         .withGridX(3)
                         .withGridY(0)
                         .toConstraints());
+
+        optionPanel.add(createRenameButton(),
+                new GridBagBucket()
+                        .withGridX(4)
+                        .withGridY(0)
+                        .toConstraints());
+
         return optionPanel;
     }
 
@@ -227,7 +235,28 @@ public class MainFrame extends JFrame {
                     public void keyReleased(KeyEvent e) {
                         actions.changeOption();
                     }
-                });
+                },
+                false);
+    }
+
+    private JButton createRenameButton() {
+        return createButton(
+                BUTTON_RENAME,
+                new Dimension(100, 30),
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        actions.renameFiles();
+                    }
+                },
+                new KeyAdapter() {
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == VK_ENTER) {
+                            actions.renameFiles();
+                        }
+                    }
+                }
+        );
     }
 
 }

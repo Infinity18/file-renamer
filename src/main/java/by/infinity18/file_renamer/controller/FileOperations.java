@@ -30,6 +30,19 @@ public class FileOperations {
         }
     }
 
+    public static boolean renameFileList(List<FileObject> fileObjectList) {
+        for (FileObject fileObject : fileObjectList) {
+            File file = fileObject.getFile();
+            String oldName = fileObject.getOldName();
+            String newName = fileObject.getNewName();
+            File newFile = new File(file.getAbsolutePath().replace(oldName, newName));
+            if (!file.renameTo(newFile)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private static List<FileObject> buildFileObjectList(File[] files) {
         List<FileObject> fileObjectList = new ArrayList<FileObject>(files.length);
         for (File file : files) {

@@ -37,9 +37,14 @@ public class SwingUtils {
     }
 
     public static JTextField createTextField(Dimension preferredSize, KeyAdapter keyListener) {
+        return createTextField(preferredSize, keyListener, true);
+    }
+
+    public static JTextField createTextField(Dimension preferredSize, KeyAdapter keyListener, boolean enabled) {
         JTextField textField = new JTextField();
         textField.setPreferredSize(preferredSize);
         textField.addKeyListener(keyListener);
+        textField.setEnabled(enabled);
         return textField;
     }
 

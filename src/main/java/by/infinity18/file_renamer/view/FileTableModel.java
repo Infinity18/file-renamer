@@ -3,6 +3,7 @@ package by.infinity18.file_renamer.view;
 import by.infinity18.file_renamer.FileObject;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,11 @@ import java.util.List;
 public class FileTableModel extends AbstractTableModel {
 
     private List<FileObject> fileObjects;
-    private static final String[] COLUMN_NAMES = {"Старое имя Файла", "Новое имя файла"};
+    private static final String[] COLUMN_NAMES = {"Old name", "New name"};
+
+    public FileTableModel() {
+        this.fileObjects = new ArrayList<FileObject>(0);
+    }
 
     public FileTableModel(List<FileObject> fileObjects) {
         this.fileObjects = fileObjects;
