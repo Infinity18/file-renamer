@@ -12,7 +12,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>1.5</jdk.version>
+        <jdk.version>1.7</jdk.version>
     </properties>
 
     <dependencies>
@@ -59,7 +59,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass></mainClass>
+                            <mainClass>by.infinity18.file_renamer.FileRenamer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
